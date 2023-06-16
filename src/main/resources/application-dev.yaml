@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: 1234
+    password: 
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -19,8 +19,6 @@ spring:
 
 fake-api:
   url: https://fakestoreapi.com
-
-
 
 server:
   port: 8181
