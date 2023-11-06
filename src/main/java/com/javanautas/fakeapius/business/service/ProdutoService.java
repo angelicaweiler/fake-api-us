@@ -6,6 +6,7 @@ import com.javanautas.fakeapius.infrastructure.entities.ProdutoEntity;
 import com.javanautas.fakeapius.infrastructure.exceptions.BusinessException;
 import com.javanautas.fakeapius.infrastructure.exceptions.ConflictException;
 import com.javanautas.fakeapius.infrastructure.exceptions.UnprocessableEntityException;
+import com.javanautas.fakeapius.infrastructure.message.producer.FakeApiProducer;
 import com.javanautas.fakeapius.infrastructure.repositories.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class ProdutoService {
 
     private final ProdutoRepository repository;
     private final ProdutoConverter converter;
+    private final FakeApiProducer producer;
 
     public ProdutoEntity salvaProdutos(ProdutoEntity entity) {
         try{
@@ -41,6 +43,23 @@ public class ProdutoService {
         }catch (ConflictException e) {
             throw new ConflictException(e.getMessage());
         } catch (Exception e) {
+            throw new BusinessException("Erro ao salvar Produtos" + e);
+        }
+    }
+
+    public void salvaProdutoConsumer(ProductsDTO dto) {
+        try {
+            Boolean retorno = existsPorNome(dto.getNome());
+            if (retorno.equals(true)) {
+                producer.enviaRespostaCadastroProdutos("Produto " + dto.getNome() + " já existente no banco de dados.");
+                throw new ConflictException("Produto já existente no banco de dados " + dto.getNome());
+            }
+            repository.save(converter.toEntity(dto));
+            producer.enviaRespostaCadastroProdutos("Produto " + dto.getNome() + " gravado com sucesso.");
+        } catch (ConflictException e) {
+            throw new ConflictException(e.getMessage());
+        } catch (Exception e) {
+            producer.enviaRespostaCadastroProdutos("Erro ao gravar o produto " + dto.getNome());
             throw new BusinessException("Erro ao salvar Produtos" + e);
         }
     }
