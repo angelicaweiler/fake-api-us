@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: 
+    password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -16,6 +16,14 @@ spring:
     loadbalancer:
       ribbon:
         enable: true
+
+topico:
+  fake-api:
+    consumer:
+      nome: fake-api-consumer-products-v2
+      group-id: javanauta
+    producer:
+      nome: fake-api-producer-products-v2
 
 fake-api:
   url: https://fakestoreapi.com
