@@ -23,7 +23,7 @@ public class FakeApiProducer {
         try{
             kafkaTemplate.send(topico, mensagem);
         } catch (Exception e) {
-            throw new BusinessException("Erro ao produzir mensagem do kafka" + e);
+            throw new BusinessException("Erro ao produzir mensagem do kafka");
         }
     }
 

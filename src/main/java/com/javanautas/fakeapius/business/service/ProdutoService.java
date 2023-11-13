@@ -28,7 +28,7 @@ public class ProdutoService {
         try{
             return repository.save(entity);
         } catch (Exception e) {
-            throw new BusinessException("Erro ao salvar Produtos" + e);
+            throw new BusinessException("Erro ao salvar Produtos ");
         }
     }
 
@@ -43,7 +43,7 @@ public class ProdutoService {
         }catch (ConflictException e) {
             throw new ConflictException(e.getMessage());
         } catch (Exception e) {
-            throw new BusinessException("Erro ao salvar Produtos" + e);
+            throw new BusinessException("Erro ao salvar Produtos");
         }
     }
 
