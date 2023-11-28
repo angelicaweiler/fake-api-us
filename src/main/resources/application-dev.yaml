@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: 1234
+    password:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -16,6 +16,25 @@ spring:
     loadbalancer:
       ribbon:
         enable: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
 
 topico:
   fake-api:
@@ -30,3 +49,8 @@ fake-api:
 
 server:
   port: 8181
+
+send:
+  mail:
+    to:
+    from:

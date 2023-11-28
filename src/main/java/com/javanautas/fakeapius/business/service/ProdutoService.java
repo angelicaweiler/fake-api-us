@@ -2,6 +2,7 @@ package com.javanautas.fakeapius.business.service;
 
 import com.javanautas.fakeapius.apiv1.dto.ProductsDTO;
 import com.javanautas.fakeapius.business.converter.ProdutoConverter;
+import com.javanautas.fakeapius.infrastructure.configs.error.NotificacaoErro;
 import com.javanautas.fakeapius.infrastructure.entities.ProdutoEntity;
 import com.javanautas.fakeapius.infrastructure.exceptions.BusinessException;
 import com.javanautas.fakeapius.infrastructure.exceptions.ConflictException;
@@ -18,6 +19,7 @@ import static java.lang.String.format;
 
 @Service
 @RequiredArgsConstructor
+@NotificacaoErro
 public class ProdutoService {
 
     private final ProdutoRepository repository;
