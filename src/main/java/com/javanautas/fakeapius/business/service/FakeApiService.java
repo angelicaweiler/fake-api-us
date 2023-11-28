@@ -3,6 +3,7 @@ package com.javanautas.fakeapius.business.service;
 import com.javanautas.fakeapius.apiv1.dto.ProductsDTO;
 import com.javanautas.fakeapius.business.converter.ProdutoConverter;
 import com.javanautas.fakeapius.infrastructure.client.FakeApiClient;
+import com.javanautas.fakeapius.infrastructure.configs.error.NotificacaoErro;
 import com.javanautas.fakeapius.infrastructure.exceptions.BusinessException;
 import com.javanautas.fakeapius.infrastructure.exceptions.ConflictException;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class FakeApiService {
     private final ProdutoConverter converter;
     private final ProdutoService produtoService;
 
+    @NotificacaoErro
     public List<ProductsDTO> buscaProdutos() {
         try {
 
